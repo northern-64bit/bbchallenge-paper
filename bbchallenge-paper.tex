@@ -1,0 +1,96 @@
+% !TeX root = bbchallenge-paper.tex
+
+\title{bbchallenge paper}
+\author{
+        bbchallenge's contributors
+}
+
+\documentclass[a4paper,british]{article}
+
+\usepackage{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[margin=1in]{geometry}
+%\usepackage{subfig}
+\usepackage[hidelinks]{hyperref}
+\usepackage{caption}
+\usepackage{floatpag}
+\usepackage{subcaption}
+\usepackage{tikz}
+
+\usepackage{algorithm}
+\usepackage[noend]{algpseudocode}
+
+
+\usepackage{graphicx}
+\usepackage{mathtools}
+
+\usepackage{amsmath,amsfonts,amssymb,amsthm}
+
+\theoremstyle{definition} % don't use italics
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{definition}{Definition}[section]
+\newtheorem{lemma}{Lemma}[section]
+\newtheorem{proposition}{Proposition}[section]
+\newtheorem{corollary}{Corollary}[section]
+\numberwithin{equation}{section}
+
+
+\theoremstyle{definition} % emphasize the "Remark N." with italics, not bold
+\newtheorem{observation}{Observation}[section]
+\newtheorem{example}{Example}[section]
+\newtheorem{remark}{Remark}[section]
+
+\usepackage{xassoccnt}
+\DeclareCoupledCountersGroup{theorems}
+\DeclareCoupledCounters[name=theorems]{theorem,definition,lemma,proposition,corollary,remark,observation,example}
+
+\usepackage{microtype,xspace,wrapfig,multicol} 
+\usepackage[textsize=tiny,color=lightgray]{todonotes} 
+\usepackage[normalem]{ulem} % sout
+\usepackage{stmaryrd}
+
+\newcommand{\ts}[1]{{\color{red}#1}}
+\newcommand{\tsi}[1]{\todo[inline]{TS: #1}}
+\newcommand{\tsm}[1]{\todo{TS: #1}}
+\newcommand{\tss}[2]{{\ts{\sout{#1}}} {\ts{#2}}}
+\newcommand{\jb}[1]{{\color{blue}#1}}
+\newcommand{\jbi}[1]{\todo[inline]{JB: #1}}
+\newcommand{\jbm}[1]{\todo{JB: #1}}
+\newcommand{\jbs}[2]{{\jb{\sout{#1}}} {\jb{#2}}}
+\newcommand{\tabi}{\hspace{\algorithmicindent}}
+\newcommand{\Lim}[1]{\raisebox{0.5ex}{\scalebox{0.8}{$\displaystyle \lim_{#1}\;$}}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+
+\newcommand{\lhead}[1]{\stackrel{#1}\triangleleft}
+\newcommand{\rhead}[1]{\stackrel{#1}\triangleright}
+
+\usepackage{xcolor}
+
+\definecolor{colorA}{RGB}{255,0,0}
+\definecolor{colorB}{RGB}{255,128,0}
+\definecolor{colorC}{RGB}{0,0,255}
+\definecolor{colorD}{RGB}{0,255,0}
+\definecolor{colorE}{RGB}{255,0,255}
+
+\begin{document}
+\date{}
+\maketitle
+
+\begin{abstract}
+    :)
+\end{abstract}
+
+
+\setcounter{tocdepth}{2}
+\tableofcontents
+
+\section{Introduction}
+
+Let's go! Love the original BB paper \cite{Rado_1962}.
+
+\bibliographystyle{abbrv}
+\newpage
+\bibliography{bbchallenge-paper}
+
+\end{document}
