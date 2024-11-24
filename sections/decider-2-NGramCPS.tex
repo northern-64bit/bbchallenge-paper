@@ -1,0 +1,69 @@
+% !TeX root = ../bbchallenge-paper.tex
+
+\newpage
+\subsection{n-gram Closed Position Set (NGramCPS)}\label{sec:n-gramCPS}
+
+\newcommand{\alphabet}{\mathcal{A}}
+
+\begin{algorithm}
+    \caption{{\sc decider-NGramCPS}}\label{alg:translated-cyclers}
+
+    \begin{algorithmic}[1]
+        \State{\textbf{Input:} a Turing machine `tm', the zero symbol of the alphabet $\alphabet_0$, the size of the n-grams $r > 0$.}
+        \State{\textbf{Output:} `NON-HALT' if the decider detects that the machine doesn't halt and `UNKNOWN' otherwise.}
+
+        \State $g_0 = (\alphabet_0)^r$ \Comment{The zero n-gram consists of $r$ zero symbols}
+        \State $L = \{ g_0 \}$ \Comment{The seen left n-grams}
+        \State $R = \{ g_0 \}$ \Comment{The seen right n-grams}
+        \State $C =$ \{\{.lngram $=$ $g_0$, .rngram $=$ $g_0$, .msymbol $=$ $\alphabet_0$, .state $=$ \textcolor{colorA}{A} \}\} \Comment{The seen local contexts}
+        \While{true}
+        \State $V = C$
+        \State any\_updates $=$ false
+        \While{$|V| \neq 0$}
+        \State $c = V.\textbf{pop}()$
+        \State $c' = c$
+        \State $\{w,d,s\}$ $=$ tm(c.state, c.msymbol) \Comment{Transition's write symbol, move direction, and next state}
+        \State \If{$s$ is undefined}
+        \State \textbf{return} UNKNOWN
+        \EndIf
+        \State \If{$d$ is Right}
+        \State Add $c.\text{lngram}$ to $L$
+        \State Set $c'.\text{lngram}$ to the last $r-1$ symbols of $c.\text{lngram}$ followed by $w$
+        \State Set $c'.\text{rngram}$ to the last $r-1$ symbols of $c.\text{rngram}$
+        \State Set $c'.\text{msymbol}$ to the first symbol of $c.\text{rngram}$
+        \State \textbf{For} each ngram $r$ in $R$ starting by $c'.\text{rngram}$
+        \State \tabi Set $c'.\text{rngram}$ to $r$
+        \If{$c'$ is not in $C$}
+        \State \tabi Insert $c'$ in $C$
+        \State \tabi Insert $c'$ in $V$
+        \State \tabi any\_updates $=$ true
+        \EndIf
+        \State \textbf{EndFor}
+        \EndIf
+        \State \If{$d$ is Left}
+        \State Add $c.\text{rngram}$ to $R$
+        \State Set $c'.\text{rngram}$ to the first $r-1$ symbols of $c.\text{rngram}$ preceded by $w$
+        \State Set $c'.\text{lngram}$ to the first $r-1$ symbols of $c.\text{lngram}$
+        \State Set $c'.\text{msymbol}$ to the last symbol of $c.\text{lngram}$
+        \State \textbf{For} each ngram $l$ in $L$ ending in $c'.\text{lngram}$
+        \State \tabi Set $c'.\text{lngram}$ to $l$
+        \If{$c'$ is not in $C$}
+        \State \tabi Insert $c'$ in $C$
+        \State \tabi Insert $c'$ in $V$
+        \State \tabi any\_updates $=$ true
+        \EndIf
+        \State \textbf{EndFor}
+        \EndIf
+        \EndWhile
+        \State \If{\textbf{not} any\_updates}
+        \State \textbf{return} NON-HALT
+        \EndIf
+
+        \EndWhile
+
+
+
+
+    \end{algorithmic}
+
+\end{algorithm}
