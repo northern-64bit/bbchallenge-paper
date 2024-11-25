@@ -23,7 +23,7 @@ The central idea of this decider and the reason behind using the ``$n$-gram'' te
 The algorithm systematically revisits all previously added local configurations, in case they contain a right/left $n$-gram that was newly met (Algorithm~\ref{alg:NGramCPS}, l.\ref{alg:NGramCPS:line:whileTrue}). Assuming a finite tape alphabet (which we always do in this work), the algorithm will eventually terminate since the number of possible local configurations is finite. In practice, one may add a limit on the number of iterations to avoid long computations.
 
 \begin{theorem}[Correctness of \ngramcps]
-    Consider a Turing machine using finite tape alphabet $\alphabet$ containing zero symbol $\alphabet_0$. If the \ngramcps decider returns `NON-HALT' when ran on the machine using some $n$-gram length parameter $n > 0$, then the machine does not halt from initial infinite tape containing all $\alphabet_0$.
+    Consider a Turing machine using tape alphabet $\alphabet$ containing zero symbol $\alphabet_0$. If the \ngramcps decider returns `NON-HALT' when ran on the machine using some $n$-gram length parameter $n > 0$, then the machine does not halt from initial infinite tape containing all $\alphabet_0$.
 \end{theorem}
 \begin{proof}
     TODO. Point to Coq-BB5's NGramCPS.v. Consider using yforster's package for linking theorems to Coq.
