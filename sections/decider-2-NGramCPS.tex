@@ -9,7 +9,7 @@
 
 The $n$-gram Closed Position Set (\ngramcps) decider is a simplification of a technique, Closed Position Set (CPS) initially introduced in \texttt{bbfind} \cite{Skelet_bbfind}\tsm{This is assuming that the related work section will explain what bbfind is}. Surprisingly, \ngramcps is a relatively simple technique which makes a potent decider, especially when augmenting the binary alphabet of Turing machines to record extra information on the tape, such as a fixed-length history of previously seen (state,symbol) pairs, see Section~\ref{sec:n-gramCPS:augmentations}.
 
-\subsubsection{\ngramcps algorithm description}\label{sec:n-gramCPS:algo}
+\subsubsection{\ngramcps algorithm}\label{sec:n-gramCPS:algo}
 
 Algorithm~\ref{alg:NGramCPS} gives a pseudo-code of the \ngramcps decider. The decider considers finite, \textit{local configurations} of a Turing machine consisting of: the \textit{$n$-grams} respectively to the left and to the right of the head, the state the machine is in and the middle symbol (currently read by the head). By \textit{$n$-gram}, we mean a sequence of $n > 0$ symbols from the tape alphabet (for instance, the binary alphabet $\alphabet=\{0,1\}$). The algorithm builds a set of local configurations \textit{potentially} reachable by the machine until either an undefined transition is met (Algorithm~\ref{alg:NGramCPS}, l.\ref{alg:NGramCPS:line:unknown}) or no new configurations are added to the set, i.e. the set is closed under Turing machine operations (Algorithm~\ref{alg:NGramCPS}, l.\ref{alg:NGramCPS:line:non-halt}). In the first case, the decider cannot conclude and the machine is left undecided. In the second case, the decider concludes that the machine does not halt as no undefined transition can be reached.
 
@@ -22,6 +22,13 @@ The central idea of this decider and the reason behind using the ``$n$-gram'' te
 
 A symmetrical process is applied when the machine moves left (Algorithm~\ref{alg:NGramCPS}, l.\ref{alg:NGramCPS:line:moveLeft}).
 The algorithm systematically revisits all previously added local configurations, in case they contain a right/left $n$-gram that was newly met (Algorithm~\ref{alg:NGramCPS}, l.\ref{alg:NGramCPS:line:whileTrue}). Assuming a finite tape alphabet (which we always do in this work), the algorithm will eventually terminate since the number of possible local configurations is finite. In practice, one may add a limit on the number of iterations to avoid long computations.
+
+\begin{theorem}[Correctness of \ngramcps]
+    Consider a Turing machine using finite tape alphabet $\alphabet$ containing zero symbol $\alphabet_0$. If the \ngramcps decider returns `NON-HALT' when ran on the machine using some $n$-gram length parameter $n > 0$, then the machine does not halt from initial infinite tape containing all $\alphabet_0$.
+\end{theorem}
+\begin{proof}
+    TODO. Point to Coq-BB5's NGramCPS.v. Consider using yforster's package for linking theorems to Coq.
+\end{proof}
 
 \newcommand{\leftngram}{left\xspace}
 \newcommand{\rightngram}{right\xspace}
