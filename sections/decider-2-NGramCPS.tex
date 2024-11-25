@@ -51,7 +51,7 @@ The algorithm systematically revisits all previously added local configurations,
         \State $c = V.\textbf{pop}()$
         \State $c' = c$
         \State $\{w,d,s\}$ $=$ tm(c.state, c.\middlesymbol) \Comment{Transition's write symbol, move direction, and next state}
-        \State \If{$s$ is undefined} \Comment{Undefined transition is met}
+        \State \If{$s$ is undefined} \Comment{Undefined transition is met, we cannot conclude}
         \State \textbf{return} UNKNOWN\label{alg:NGramCPS:line:unknown}
         \EndIf
         \State \If{$d$ is Right}
@@ -82,7 +82,7 @@ The algorithm systematically revisits all previously added local configurations,
         \EndIf
         \EndWhile
         \State \If{\textbf{not} any\_updates}
-        \State \textbf{return} NON-HALT\label{alg:NGramCPS:line:non-halt}
+        \State \textbf{return} NON-HALT\label{alg:NGramCPS:line:non-halt} \Comment{Set $C$ is closed, and does not include undefined transitions:\\ \tabi \tabi \tabi \tabi \tabi \tabi \tabi \tabi \tabi \tabi \tabi \space \space \space \space the machine doesn't halt}
         \EndIf
 
         \EndWhile
